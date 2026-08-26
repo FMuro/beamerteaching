@@ -8,10 +8,12 @@ para la UNED y otros idiomas.
 ## Características
 
 - formato panorámico compatible con Beamer;
-- paleta sobria y fácilmente sustituible por variantes institucionales;
-- portada, títulos de diapositiva, pie con numeración y separadores de sección;
+- tipografía romana estándar de LaTeX tanto para el texto como para las
+  matemáticas;
+- paleta US basada en PANTONE 123 CVC, PANTONE 201 CVC y negro;
+- portada, títulos de diapositiva y separadores de sección, sin barra inferior;
 - entornos matemáticos en español: teorema, proposición, lema, corolario,
-  definición, ejemplo y demostración;
+  definición, ejemplo y demostración, sin fondos coloreados;
 - dependencias limitadas a Beamer y los paquetes estándar `amsmath` y
   `amssymb`;
 - compatible con pdfLaTeX y pensado para TeX Live en macOS y Texifier en iOS.
@@ -55,7 +57,6 @@ latexmk -C examples/ejemplo.tex
 
 ## Próximos pasos
 
-- afinar la identidad visual para la Universidad de Sevilla;
 - separar el núcleo del tema de las variantes US y UNED;
 - añadir soporte explícito para inglés;
 - preparar plantillas para asignaturas completas y tutorías.
