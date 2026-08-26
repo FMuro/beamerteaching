@@ -1,9 +1,20 @@
 \documentclass[aspectratio=169,11pt]{beamer}
 
 \usepackage[T1]{fontenc}
-% `provide=*` permite usar los datos modernos de Babel incluso en una
-% instalación compacta que no incluya spanish.ldf.
-\usepackage[provide=*,spanish]{babel}
+
+% Texifier y una instalación completa de TeX Live incluyen spanish.ldf.
+% La segunda rama permite probar el ejemplo en instalaciones compactas.
+\IfFileExists{spanish.ldf}{%
+  \usepackage[spanish]{babel}
+}{%
+  \usepackage{babel}
+  \babelprovide[main,import]{spanish}
+}
+
+% Permite compilar tanto desde la raíz del repositorio como desde examples/.
+\makeatletter
+\def\input@path{{../}{./}}
+\makeatother
 
 \usetheme{Teaching}
 
