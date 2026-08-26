@@ -24,7 +24,7 @@ escribe en el preámbulo:
 ```tex
 \documentclass[aspectratio=169,11pt]{beamer}
 \usepackage[T1]{fontenc}
-\usepackage[provide=*,spanish]{babel}
+\usepackage[spanish]{babel}
 \usetheme{Teaching}
 ```
 
@@ -42,6 +42,10 @@ Desde la raíz del repositorio:
 ```sh
 latexmk -pdf examples/ejemplo.tex
 ```
+
+También puede compilarse directamente desde `examples/`, como suele hacer
+Texifier. El ejemplo añade las rutas `../` y `./` a la búsqueda de ficheros
+para localizar `beamerthemeTeaching.sty` en ambos casos.
 
 Para eliminar los ficheros auxiliares:
 
