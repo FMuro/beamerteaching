@@ -1,7 +1,7 @@
 % beamerthemeTeaching.sty
 % A lightweight Beamer theme for university mathematics teaching.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.1 Teaching Beamer theme]
+\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.2 Teaching Beamer theme]
 
 \mode<presentation>
 
@@ -23,51 +23,53 @@
 % --------------------------------------------------------------------------
 % Palette
 % --------------------------------------------------------------------------
-% The palette is deliberately independent of an institution.  A later US or
-% UNED variant can replace these colours without changing the layout.
-\definecolor{TeachingPrimary}{RGB}{126,30,52}
-\definecolor{TeachingPrimaryDark}{RGB}{82,20,35}
-\definecolor{TeachingAccent}{RGB}{205,151,64}
-\definecolor{TeachingInk}{RGB}{38,38,42}
-\definecolor{TeachingMuted}{RGB}{105,105,112}
-\definecolor{TeachingPaper}{RGB}{250,249,247}
-\definecolor{TeachingSoft}{RGB}{243,237,238}
+% PANTONE 123 CVC (yellow) and PANTONE 201 CVC (red).  The RGB values are
+% those specified for the institutional palette in the current US digital
+% identity manual.
+\definecolor{USPantoneOneTwoThree}{RGB}{250,186,9}
+\definecolor{USPantoneTwoZeroOne}{RGB}{165,1,51}
+\definecolor{TeachingBlack}{RGB}{0,0,0}
 
-\setbeamercolor{normal text}{fg=TeachingInk,bg=white}
-\setbeamercolor{structure}{fg=TeachingPrimary}
-\setbeamercolor{alerted text}{fg=TeachingPrimaryDark}
-\setbeamercolor{title}{fg=TeachingPrimaryDark}
-\setbeamercolor{subtitle}{fg=TeachingMuted}
-\setbeamercolor{author}{fg=TeachingInk}
-\setbeamercolor{institute}{fg=TeachingMuted}
-\setbeamercolor{date}{fg=TeachingMuted}
-\setbeamercolor{frametitle}{fg=white,bg=TeachingPrimary}
-\setbeamercolor{framesubtitle}{fg=TeachingSoft,bg=TeachingPrimary}
-\setbeamercolor{section title}{fg=white,bg=TeachingPrimary}
-\setbeamercolor{footline}{fg=TeachingMuted,bg=TeachingPaper}
+\setbeamercolor{normal text}{fg=TeachingBlack,bg=white}
+\setbeamercolor{structure}{fg=USPantoneTwoZeroOne}
+\setbeamercolor{alerted text}{fg=USPantoneTwoZeroOne}
+\setbeamercolor{title}{fg=USPantoneTwoZeroOne}
+\setbeamercolor{subtitle}{fg=TeachingBlack}
+\setbeamercolor{author}{fg=TeachingBlack}
+\setbeamercolor{institute}{fg=TeachingBlack}
+\setbeamercolor{date}{fg=TeachingBlack}
+\setbeamercolor{frametitle}{fg=USPantoneTwoZeroOne,bg=white}
+\setbeamercolor{framesubtitle}{fg=TeachingBlack,bg=white}
+\setbeamercolor{frame rule}{bg=USPantoneOneTwoThree}
+\setbeamercolor{section title}{fg=white,bg=USPantoneTwoZeroOne}
 
-\setbeamercolor{block title}{fg=white,bg=TeachingPrimary}
-\setbeamercolor{block body}{fg=TeachingInk,bg=TeachingSoft}
-\setbeamercolor{block title alerted}{fg=white,bg=TeachingPrimaryDark}
-\setbeamercolor{block body alerted}{fg=TeachingInk,bg=TeachingSoft}
-\setbeamercolor{block title example}{fg=white,bg=TeachingMuted}
-\setbeamercolor{block body example}{fg=TeachingInk,bg=TeachingPaper}
+% Mathematical environments retain the standard AMS distinction: plain
+% theorems are italic, while definitions, examples and proofs are upright.
+% Colour is restricted to their titles; the bodies have no coloured ground.
+\setbeamercolor{block title}{fg=USPantoneTwoZeroOne,bg=white}
+\setbeamercolor{block body}{fg=TeachingBlack,bg=white}
+\setbeamercolor{block title alerted}{fg=USPantoneTwoZeroOne,bg=white}
+\setbeamercolor{block body alerted}{fg=TeachingBlack,bg=white}
+\setbeamercolor{block title example}{fg=USPantoneTwoZeroOne,bg=white}
+\setbeamercolor{block body example}{fg=TeachingBlack,bg=white}
 
 % --------------------------------------------------------------------------
 % Typography and lists
 % --------------------------------------------------------------------------
-\usefonttheme{professionalfonts}
+% Standard LaTeX roman fonts for text and mathematics: no external font
+% package is required.
+\usefonttheme{serif}
 \setbeamerfont{title}{series=\bfseries,size=\LARGE}
 \setbeamerfont{subtitle}{size=\large}
 \setbeamerfont{frametitle}{series=\bfseries,size=\large}
 \setbeamerfont{framesubtitle}{series=\mdseries,size=\small}
 \setbeamerfont{block title}{series=\bfseries}
-\setbeamerfont{footline}{size=\scriptsize}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{items}[circle]
 \setbeamertemplate{enumerate items}[default]
-\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{blocks}[default]
+\setbeamertemplate{footline}{}
 \setbeamersize{text margin left=8mm,text margin right=8mm}
 
 % --------------------------------------------------------------------------
@@ -83,7 +85,7 @@
       {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
     \fi
     \vskip0.8em
-    {\color{TeachingAccent}\rule{0.23\paperwidth}{1.4pt}\par}
+    {\color{USPantoneOneTwoThree}\rule{0.23\paperwidth}{1.4pt}\par}
     \vskip1.1em
     {\usebeamerfont{author}\insertauthor\par}
     \vskip0.25em
@@ -107,24 +109,8 @@
       \par\usebeamerfont{framesubtitle}\insertframesubtitle\strut
     \fi
   \end{beamercolorbox}
-}
-
-% --------------------------------------------------------------------------
-% Footer
-% --------------------------------------------------------------------------
-\setbeamertemplate{footline}{%
-  \leavevmode
-  \begin{beamercolorbox}[
-      wd=\paperwidth,
-      ht=2.8ex,
-      dp=1.2ex,
-      leftskip=8mm,
-      rightskip=8mm
-    ]{footline}
-    \usebeamerfont{footline}%
-    \insertshortauthor
-    \ifx\insertshorttitle\@empty\else\hfill\insertshorttitle\fi
-    \hfill\insertframenumber\,/\,\inserttotalframenumber
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.7pt,dp=0pt]{frame rule}
   \end{beamercolorbox}
 }
 
@@ -134,7 +120,7 @@
 \ifTeaching@sectionpages
   \AtBeginSection[]{%
     \begingroup
-      \setbeamercolor{background canvas}{bg=TeachingPrimary}
+      \setbeamercolor{background canvas}{bg=USPantoneTwoZeroOne}
       \begin{frame}[plain,noframenumbering]
         \vfill
         \centering
