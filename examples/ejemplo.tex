@@ -1,0 +1,86 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usepackage[T1]{fontenc}
+% `provide=*` permite usar los datos modernos de Babel incluso en una
+% instalación compacta que no incluya spanish.ldf.
+\usepackage[provide=*,spanish]{babel}
+
+\usetheme{Teaching}
+
+\title[Álgebra lineal]{Álgebra lineal y geometría I}
+\subtitle{Una muestra del tema Teaching}
+\author[F. Muro]{Fernando Muro}
+\institute[US]{Universidad de Sevilla}
+\date{Curso 2026--2027}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}{Índice}
+  \tableofcontents
+\end{frame}
+
+\section{Aplicaciones lineales}
+
+\begin{frame}{Núcleo e imagen}
+  \begin{definition}
+    Sea $f\colon V\to W$ una aplicación lineal. Definimos
+    \[
+      \ker f=\{v\in V:f(v)=0\},
+      \qquad
+      \operatorname{im}f=\{f(v):v\in V\}.
+    \]
+  \end{definition}
+
+  \begin{proposition}
+    Tanto $\ker f$ como $\operatorname{im}f$ son subespacios vectoriales.
+  \end{proposition}
+\end{frame}
+
+\begin{frame}{Teorema de la dimensión}
+  \begin{theorem}
+    Si $V$ es de dimensión finita, entonces
+    \[
+      \dim V=\dim(\ker f)+\dim(\operatorname{im}f).
+    \]
+  \end{theorem}
+
+  \begin{proof}
+    Completamos una base de $\ker f$ hasta obtener una base de $V$ y
+    aplicamos $f$ a los vectores añadidos.
+  \end{proof}
+\end{frame}
+
+\begin{frame}{Consecuencias y ejemplos}
+  \begin{corollary}
+    Si $\dim V=\dim W<\infty$, entonces $f$ es inyectiva si y solo si es
+    suprayectiva.
+  \end{corollary}
+
+  \begin{example}
+    La aplicación $f\colon\mathbb{R}^3\to\mathbb{R}^2$ dada por
+    \[
+      f(x,y,z)=(x+y,y+z)
+    \]
+    tiene núcleo generado por $(1,-1,1)$.
+  \end{example}
+\end{frame}
+
+\begin{frame}{Una lista progresiva}
+  Para estudiar una aplicación lineal:
+  \begin{enumerate}
+    \item elegimos bases;
+    \pause
+    \item calculamos su matriz;
+    \pause
+    \item reducimos mediante eliminación de Gauss.
+  \end{enumerate}
+
+  \medskip
+  \alert{Idea clave:} la matriz depende de las bases; la aplicación no.
+\end{frame}
+
+\end{document}
