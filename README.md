@@ -15,7 +15,7 @@ para la UNED y otros idiomas.
 - entornos matemáticos en español: teorema, proposición, lema, corolario,
   definición, ejemplo, ejercicio, demostración y solución, sin fondos
   coloreados;
-- segmentos para demostraciones y soluciones que ocupan varias diapositivas;
+- demostraciones y soluciones divisibles automáticamente entre diapositivas;
 - dependencias limitadas a Beamer y los paquetes estándar `amsmath` y
   `amssymb`;
 - compatible con pdfLaTeX y pensado para TeX Live en macOS y Texifier en iOS.
@@ -41,30 +41,27 @@ Puede desactivarse con:
 
 ## Demostraciones en varias diapositivas
 
-Los entornos de LaTeX no deben permanecer abiertos entre dos entornos `frame`.
-Para una demostración larga, se usa `proofpart` en todos los segmentos salvo el
-último. Solo el último segmento, escrito con `proof`, muestra el cuadrado final:
+Los entornos `proof` y `solution` tienen una presentación ligera, sin cajas, y
+pueden dividirse automáticamente mediante la opción `allowframebreaks`. El
+cuadrado de cierre queda al final del entorno y aparece únicamente en la última
+diapositiva:
 
 ```tex
-\begin{frame}{Teorema fundamental}
+\begin{frame}[allowframebreaks]{Teorema fundamental}
   \begin{theorem}
     % Enunciado
   \end{theorem}
-  \begin{proofpart}
-    % Primera parte de la demostración
-  \end{proofpart}
-\end{frame}
 
-\begin{frame}{Teorema fundamental}
-  \begin{proof}[\proofcontinuationname]
-    % Última parte de la demostración
+  \begin{proof}
+    % Demostración completa
   \end{proof}
 \end{frame}
 ```
 
-Si hacen falta más de dos diapositivas, los segmentos intermedios también usan
-`proofpart`, opcionalmente con el título
-`[\proofcontinuationname]`.
+Beamer escoge los puntos de división. Puede indicarse un punto preferido o
+forzar un salto con `\framebreak` sin cerrar el entorno `proof`. Los entornos
+`proofpart` y `solutionpart` se conservan como alternativa cuando se quieran
+diseñar las diapositivas por separado.
 
 ## Ejercicios y soluciones
 
@@ -78,23 +75,16 @@ El entorno `exercise` contiene el enunciado y usa letra redonda. El entorno
   \end{exercise}
 \end{frame}
 
-\begin{frame}{Solución}
-  \begin{solutionpart}
-    % Primera parte de la solución
-  \end{solutionpart}
-\end{frame}
-
-\begin{frame}{Solución}
-  \begin{solution}[\solutioncontinuationname]
-    % Última parte de la solución
+\begin{frame}[allowframebreaks]{Solución}
+  \begin{solution}
+    % Solución completa; puede contener \framebreak
   \end{solution}
 \end{frame}
 ```
 
-Como en las demostraciones, se usa `solutionpart` en todos los segmentos no
-finales. Puede escribirse
-`\begin{solutionpart}[\solutioncontinuationname]` para marcar expresamente las
-continuaciones.
+No es necesario dividir la solución manualmente. El título de la diapositiva
+recibe en las continuaciones la marca que proporciona Beamer, y el cuadrado se
+mantiene en la última.
 
 ## Ejemplo
 

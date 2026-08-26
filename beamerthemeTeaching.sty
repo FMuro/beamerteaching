@@ -1,7 +1,7 @@
 % beamerthemeTeaching.sty
 % A lightweight Beamer theme for university mathematics teaching.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.3 Teaching Beamer theme]
+\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.4 Teaching Beamer theme]
 
 \mode<presentation>
 
@@ -71,6 +71,23 @@
 \setbeamertemplate{blocks}[default]
 \setbeamertemplate{footline}{}
 \setbeamersize{text margin left=8mm,text margin right=8mm}
+
+% Beamer's default proof template is a block and therefore an indivisible
+% box.  This unboxed template keeps the same visual hierarchy while allowing
+% `allowframebreaks` to split a proof (and the proof-based `solution`
+% environment below) between slides.  AMS places the QED symbol at the end of
+% the vertical material, so it appears only on the final slide.
+\setbeamertemplate{proof begin}{%
+  \par\medskip
+  {\noindent
+    \usebeamerfont{block title}%
+    \usebeamercolor[fg]{block title}%
+    \insertproofname\par}%
+  \smallskip
+}
+\setbeamertemplate{proof end}{\par\medskip}
+\setbeamertemplate{qed symbol}{%
+  \usebeamercolor[fg]{structure}\openbox}
 
 % --------------------------------------------------------------------------
 % Title page and frame titles
@@ -163,9 +180,9 @@
   {\begin{proof}[#1]}
   {\end{proof}}
 
-% A proof or solution cannot remain open across frame boundaries.  These
-% environments typeset a non-final segment without the closing QED symbol.
-% The final segment should use the ordinary `proof` or `solution` environment.
+% Manual segmentation remains available when independently designed frames
+% are preferable to an automatically broken frame.  Non-final segments omit
+% the QED symbol; the final one uses the ordinary `proof` or `solution`.
 \newenvironment{proofpart}[1][\translate{Proof}]
   {\begingroup\renewcommand{\qedsymbol}{}\begin{proof}[#1]}
   {\end{proof}\endgroup}
