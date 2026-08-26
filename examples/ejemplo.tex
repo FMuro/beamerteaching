@@ -1,6 +1,5 @@
 \documentclass[aspectratio=169,11pt]{beamer}
 
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
 % Texifier y una instalación completa de TeX Live incluyen spanish.ldf.
@@ -52,7 +51,7 @@
   \end{proposition}
 \end{frame}
 
-\begin{frame}{Teorema de la dimensión}
+\begin{frame}[allowframebreaks]{Teorema de la dimensión}
   \begin{theorem}
     Si $V$ es de dimensión finita, entonces
     \[
@@ -61,8 +60,47 @@
   \end{theorem}
 
   \begin{proof}
-    Completamos una base de $\ker f$ hasta obtener una base de $V$ y
-    aplicamos $f$ a los vectores añadidos.
+    Escribimos $n=\dim V$ y $r=\dim(\ker f)$. Elegimos una base
+    \[
+      u_1,\dots,u_r
+    \]
+    de $\ker f$ y la completamos hasta obtener una base de $V$:
+    \[
+      u_1,\dots,u_r,v_1,\dots,v_{n-r}
+    \]
+
+    Veamos primero que $f(v_1),\dots,f(v_{n-r})$ generan
+    $\operatorname{im}f$. Si $y\in\operatorname{im}f$, existe $x\in V$ tal
+    que $y=f(x)$. Escribiendo
+    \[
+      x=\sum_{i=1}^r a_i u_i+
+        \sum_{j=1}^{n-r}b_jv_j,
+    \]
+    y usando que $f(u_i)=0$, obtenemos
+    \[
+      y=f(x)=\sum_{j=1}^{n-r}b_jf(v_j).
+    \]
+
+    Comprobemos ahora que estos vectores son linealmente independientes.
+    Supongamos que
+    \[
+      \sum_{j=1}^{n-r}b_jf(v_j)=0.
+    \]
+    Entonces $\sum_jb_jv_j\in\ker f$, de modo que existen escalares $a_i$
+    tales que
+    \[
+      \sum_{j=1}^{n-r}b_jv_j=\sum_{i=1}^r a_i u_i.
+    \]
+    La independencia lineal de la base elegida obliga a que todos los
+    escalares $a_i$ y $b_j$ sean nulos.
+
+    Por tanto, $f(v_1),\dots,f(v_{n-r})$ es una base de
+    $\operatorname{im}f$. En consecuencia,
+    \[
+      \dim(\operatorname{im}f)=n-r
+      =\dim V-\dim(\ker f),
+    \]
+    que es la igualdad buscada.
   \end{proof}
 \end{frame}
 
@@ -79,6 +117,75 @@
     \]
     tiene núcleo generado por $(1,-1,1)$.
   \end{example}
+\end{frame}
+
+\section{Ejercicios}
+
+\begin{frame}{Cálculo del núcleo y de la imagen}
+  \begin{exercise}
+    Sea $f\colon\mathbb{R}^4\to\mathbb{R}^3$ la aplicación lineal dada por
+    \[
+      f(x,y,z,t)=
+      (x+y+z,\ y+z+t,\ x+2y+2z+t).
+    \]
+    Calcula bases de $\ker f$ y de $\operatorname{im}f$, y comprueba el
+    teorema de la dimensión.
+  \end{exercise}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Solución del ejercicio}
+  \begin{solution}
+    La matriz de $f$ respecto de las bases canónicas es
+    \[
+      A=\begin{pmatrix}
+        1&1&1&0\\
+        0&1&1&1\\
+        1&2&2&1
+      \end{pmatrix}.
+    \]
+    Restando a la tercera fila la suma de las dos primeras obtenemos
+    \[
+      A\sim
+      \begin{pmatrix}
+        1&1&1&0\\
+        0&1&1&1\\
+        0&0&0&0
+      \end{pmatrix}.
+    \]
+
+    Para calcular el núcleo resolvemos el sistema homogéneo
+    \[
+      x+y+z=0,
+      \qquad
+      y+z+t=0.
+    \]
+    Tomando $y=s$ y $z=r$ como parámetros libres, resulta
+    \[
+      (x,y,z,t)=(-s-r,s,r,-s-r).
+    \]
+    Por tanto,
+    \[
+      \ker f=
+      \left\langle
+        (-1,1,0,-1),\,(-1,0,1,-1)
+      \right\rangle.
+    \]
+
+    Para determinar la imagen observamos que las columnas de $A$ satisfacen
+    \[
+      c_1=(1,0,1),\qquad c_4=(0,1,1),
+      \qquad c_2=c_3=c_1+c_4.
+    \]
+    Como $c_1$ y $c_4$ son linealmente independientes, obtenemos
+    $\operatorname{im}f=\langle(1,0,1),(0,1,1)\rangle$.
+
+    Finalmente,
+    \[
+      \dim(\ker f)+\dim(\operatorname{im}f)=2+2=4
+      =\dim\mathbb{R}^4,
+    \]
+    como afirma el teorema de la dimensión.
+  \end{solution}
 \end{frame}
 
 \begin{frame}{Una lista progresiva}
