@@ -1,7 +1,7 @@
 % beamerthemeTeaching.sty
 % A lightweight Beamer theme for university mathematics teaching.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.4 Teaching Beamer theme]
+\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.5 Teaching Beamer theme]
 
 \mode<presentation>
 
@@ -89,6 +89,18 @@
 \setbeamertemplate{qed symbol}{%
   \usebeamercolor[fg]{structure}\openbox}
 
+% Use the US logo supplied with the theme as the default title graphic.  The
+% resolved path is stored so that compilation works both from the repository
+% root and from examples/.  A later \titlegraphic command can replace it.
+\newcommand{\TeachingLogoFile}{}
+\IfFileExists{assets/logo-us.png}{%
+  \edef\TeachingLogoFile{\@filef@und}%
+}{}
+\ifx\TeachingLogoFile\@empty\else
+  \titlegraphic{%
+    \includegraphics[width=0.20\paperwidth]{\TeachingLogoFile}}
+\fi
+
 % --------------------------------------------------------------------------
 % Title page and frame titles
 % --------------------------------------------------------------------------
@@ -96,19 +108,28 @@
   \vbox{}
   \vfill
   \begin{beamercolorbox}[wd=\paperwidth,leftskip=8mm,rightskip=12mm,sep=0pt]{title}
-    {\usebeamerfont{title}\inserttitle\par}
-    \ifx\insertsubtitle\@empty\else
-      \vskip0.55em
-      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+    \begin{minipage}[c]{0.66\paperwidth}
+      {\usebeamerfont{title}\inserttitle\par}
+      \ifx\insertsubtitle\@empty\else
+        \vskip0.55em
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+      \fi
+      \vskip0.8em
+      {\color{USPantoneOneTwoThree}\rule{0.23\paperwidth}{1.4pt}\par}
+      \vskip1.1em
+      {\usebeamerfont{author}\insertauthor\par}
+      \vskip0.25em
+      {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}
+      \vskip0.65em
+      {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}
+    \end{minipage}%
+    \ifx\inserttitlegraphic\@empty\else
+      \hfill
+      \begin{minipage}[c]{0.20\paperwidth}
+        \centering
+        \inserttitlegraphic
+      \end{minipage}%
     \fi
-    \vskip0.8em
-    {\color{USPantoneOneTwoThree}\rule{0.23\paperwidth}{1.4pt}\par}
-    \vskip1.1em
-    {\usebeamerfont{author}\insertauthor\par}
-    \vskip0.25em
-    {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}
-    \vskip0.65em
-    {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}
   \end{beamercolorbox}
   \vfill
 }

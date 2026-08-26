@@ -12,6 +12,7 @@ para la UNED y otros idiomas.
   matemáticas;
 - paleta US basada en PANTONE 123 CVC, PANTONE 201 CVC y negro;
 - portada, títulos de diapositiva y separadores de sección, sin barra inferior;
+- logotipo de la Universidad de Sevilla en la portada;
 - entornos matemáticos en español: teorema, proposición, lema, corolario,
   definición, ejemplo, ejercicio, demostración y solución, sin fondos
   coloreados;
@@ -22,15 +23,20 @@ para la UNED y otros idiomas.
 
 ## Uso
 
-Copia `beamerthemeTeaching.sty` junto al fichero principal de la presentación y
-escribe en el preámbulo:
+Copia `beamerthemeTeaching.sty` y el directorio `assets/` junto al fichero
+principal de la presentación y escribe en el preámbulo:
 
 ```tex
 \documentclass[aspectratio=169,11pt]{beamer}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
 \usetheme{Teaching}
 ```
+
+El tema utiliza `assets/logo-us.png` como logotipo de portada. Puede sustituirse
+con `\titlegraphic{...}` o suprimirse con `\titlegraphic{}` después de cargar el
+tema.
 
 El separador automático al comienzo de cada sección está activado por defecto.
 Puede desactivarse con:
