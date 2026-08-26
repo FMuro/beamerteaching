@@ -13,7 +13,9 @@ para la UNED y otros idiomas.
 - paleta US basada en PANTONE 123 CVC, PANTONE 201 CVC y negro;
 - portada, títulos de diapositiva y separadores de sección, sin barra inferior;
 - entornos matemáticos en español: teorema, proposición, lema, corolario,
-  definición, ejemplo y demostración, sin fondos coloreados;
+  definición, ejemplo, ejercicio, demostración y solución, sin fondos
+  coloreados;
+- segmentos para demostraciones y soluciones que ocupan varias diapositivas;
 - dependencias limitadas a Beamer y los paquetes estándar `amsmath` y
   `amssymb`;
 - compatible con pdfLaTeX y pensado para TeX Live en macOS y Texifier en iOS.
@@ -36,6 +38,63 @@ Puede desactivarse con:
 ```tex
 \usetheme[nosectionpages]{Teaching}
 ```
+
+## Demostraciones en varias diapositivas
+
+Los entornos de LaTeX no deben permanecer abiertos entre dos entornos `frame`.
+Para una demostración larga, se usa `proofpart` en todos los segmentos salvo el
+último. Solo el último segmento, escrito con `proof`, muestra el cuadrado final:
+
+```tex
+\begin{frame}{Teorema fundamental}
+  \begin{theorem}
+    % Enunciado
+  \end{theorem}
+  \begin{proofpart}
+    % Primera parte de la demostración
+  \end{proofpart}
+\end{frame}
+
+\begin{frame}{Teorema fundamental}
+  \begin{proof}[\proofcontinuationname]
+    % Última parte de la demostración
+  \end{proof}
+\end{frame}
+```
+
+Si hacen falta más de dos diapositivas, los segmentos intermedios también usan
+`proofpart`, opcionalmente con el título
+`[\proofcontinuationname]`.
+
+## Ejercicios y soluciones
+
+El entorno `exercise` contiene el enunciado y usa letra redonda. El entorno
+`solution` contiene la solución y se comporta como una demostración:
+
+```tex
+\begin{frame}{Ejercicio}
+  \begin{exercise}
+    % Enunciado
+  \end{exercise}
+\end{frame}
+
+\begin{frame}{Solución}
+  \begin{solutionpart}
+    % Primera parte de la solución
+  \end{solutionpart}
+\end{frame}
+
+\begin{frame}{Solución}
+  \begin{solution}[\solutioncontinuationname]
+    % Última parte de la solución
+  \end{solution}
+\end{frame}
+```
+
+Como en las demostraciones, se usa `solutionpart` en todos los segmentos no
+finales. Puede escribirse
+`\begin{solutionpart}[\solutioncontinuationname]` para marcar expresamente las
+continuaciones.
 
 ## Ejemplo
 

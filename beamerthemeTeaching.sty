@@ -1,7 +1,7 @@
 % beamerthemeTeaching.sty
 % A lightweight Beamer theme for university mathematics teaching.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.2 Teaching Beamer theme]
+\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.3 Teaching Beamer theme]
 
 \mode<presentation>
 
@@ -146,9 +146,41 @@
 \deftranslation[to=Spanish]{Example}{Ejemplo}
 \deftranslation[to=Spanish]{Examples}{Ejemplos}
 \deftranslation[to=Spanish]{Proof}{Demostración}
+\deftranslation[to=Spanish]{Exercise}{Ejercicio}
+\deftranslation[to=Spanish]{Solution}{Solución}
+\deftranslation[to=Spanish]{Continuation}{continuación}
 
 \theoremstyle{plain}
 \newtheorem{proposition}[theorem]{Proposición}
+
+\theoremstyle{definition}
+\newtheorem{exercise}[theorem]{\translate{Exercise}}
+
+% Beamer defines `solution` as a theorem with italic body.  For teaching
+% slides it is more natural to typeset it like a proof, in upright text and
+% with a closing symbol.
+\renewenvironment{solution}[1][\translate{Solution}]
+  {\begin{proof}[#1]}
+  {\end{proof}}
+
+% A proof or solution cannot remain open across frame boundaries.  These
+% environments typeset a non-final segment without the closing QED symbol.
+% The final segment should use the ordinary `proof` or `solution` environment.
+\newenvironment{proofpart}[1][\translate{Proof}]
+  {\begingroup\renewcommand{\qedsymbol}{}\begin{proof}[#1]}
+  {\end{proof}\endgroup}
+
+\newenvironment{solutionpart}[1][\translate{Solution}]
+  {\begingroup\renewcommand{\qedsymbol}{}\begin{proof}[#1]}
+  {\end{proof}\endgroup}
+
+\newcommand{\proofcontinuationname}{%
+  \translate{Proof}~(\translate{Continuation})}
+\newcommand{\solutioncontinuationname}{%
+  \translate{Solution}~(\translate{Continuation})}
+
+% Do not alter the theorem style selected by users after loading the theme.
+\theoremstyle{plain}
 
 \mode<all>
 
