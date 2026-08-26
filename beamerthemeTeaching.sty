@@ -1,0 +1,169 @@
+% beamerthemeTeaching.sty
+% A lightweight Beamer theme for university mathematics teaching.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeTeaching}[2026/08/26 v0.1 Teaching Beamer theme]
+
+\mode<presentation>
+
+% Beamer already loads xcolor, amsthm and translator.  Only the AMS
+% mathematical packages used by the teaching documents are requested here.
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+% --------------------------------------------------------------------------
+% Options
+% --------------------------------------------------------------------------
+\newif\ifTeaching@sectionpages
+\Teaching@sectionpagestrue
+
+\DeclareOptionBeamer{sectionpages}{\Teaching@sectionpagestrue}
+\DeclareOptionBeamer{nosectionpages}{\Teaching@sectionpagesfalse}
+\ProcessOptionsBeamer
+
+% --------------------------------------------------------------------------
+% Palette
+% --------------------------------------------------------------------------
+% The palette is deliberately independent of an institution.  A later US or
+% UNED variant can replace these colours without changing the layout.
+\definecolor{TeachingPrimary}{RGB}{126,30,52}
+\definecolor{TeachingPrimaryDark}{RGB}{82,20,35}
+\definecolor{TeachingAccent}{RGB}{205,151,64}
+\definecolor{TeachingInk}{RGB}{38,38,42}
+\definecolor{TeachingMuted}{RGB}{105,105,112}
+\definecolor{TeachingPaper}{RGB}{250,249,247}
+\definecolor{TeachingSoft}{RGB}{243,237,238}
+
+\setbeamercolor{normal text}{fg=TeachingInk,bg=white}
+\setbeamercolor{structure}{fg=TeachingPrimary}
+\setbeamercolor{alerted text}{fg=TeachingPrimaryDark}
+\setbeamercolor{title}{fg=TeachingPrimaryDark}
+\setbeamercolor{subtitle}{fg=TeachingMuted}
+\setbeamercolor{author}{fg=TeachingInk}
+\setbeamercolor{institute}{fg=TeachingMuted}
+\setbeamercolor{date}{fg=TeachingMuted}
+\setbeamercolor{frametitle}{fg=white,bg=TeachingPrimary}
+\setbeamercolor{framesubtitle}{fg=TeachingSoft,bg=TeachingPrimary}
+\setbeamercolor{section title}{fg=white,bg=TeachingPrimary}
+\setbeamercolor{footline}{fg=TeachingMuted,bg=TeachingPaper}
+
+\setbeamercolor{block title}{fg=white,bg=TeachingPrimary}
+\setbeamercolor{block body}{fg=TeachingInk,bg=TeachingSoft}
+\setbeamercolor{block title alerted}{fg=white,bg=TeachingPrimaryDark}
+\setbeamercolor{block body alerted}{fg=TeachingInk,bg=TeachingSoft}
+\setbeamercolor{block title example}{fg=white,bg=TeachingMuted}
+\setbeamercolor{block body example}{fg=TeachingInk,bg=TeachingPaper}
+
+% --------------------------------------------------------------------------
+% Typography and lists
+% --------------------------------------------------------------------------
+\usefonttheme{professionalfonts}
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\small}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamerfont{footline}{size=\scriptsize}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{items}[circle]
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamersize{text margin left=8mm,text margin right=8mm}
+
+% --------------------------------------------------------------------------
+% Title page and frame titles
+% --------------------------------------------------------------------------
+\setbeamertemplate{title page}{%
+  \vbox{}
+  \vfill
+  \begin{beamercolorbox}[wd=\paperwidth,leftskip=8mm,rightskip=12mm,sep=0pt]{title}
+    {\usebeamerfont{title}\inserttitle\par}
+    \ifx\insertsubtitle\@empty\else
+      \vskip0.55em
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+    \fi
+    \vskip0.8em
+    {\color{TeachingAccent}\rule{0.23\paperwidth}{1.4pt}\par}
+    \vskip1.1em
+    {\usebeamerfont{author}\insertauthor\par}
+    \vskip0.25em
+    {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}
+    \vskip0.65em
+    {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}
+  \end{beamercolorbox}
+  \vfill
+}
+
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+      wd=\paperwidth,
+      leftskip=8mm,
+      rightskip=8mm,
+      sep=0.24cm
+    ]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\strut
+    \ifx\insertframesubtitle\@empty\else
+      \par\usebeamerfont{framesubtitle}\insertframesubtitle\strut
+    \fi
+  \end{beamercolorbox}
+}
+
+% --------------------------------------------------------------------------
+% Footer
+% --------------------------------------------------------------------------
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \begin{beamercolorbox}[
+      wd=\paperwidth,
+      ht=2.8ex,
+      dp=1.2ex,
+      leftskip=8mm,
+      rightskip=8mm
+    ]{footline}
+    \usebeamerfont{footline}%
+    \insertshortauthor
+    \ifx\insertshorttitle\@empty\else\hfill\insertshorttitle\fi
+    \hfill\insertframenumber\,/\,\inserttotalframenumber
+  \end{beamercolorbox}
+}
+
+% --------------------------------------------------------------------------
+% Section divider
+% --------------------------------------------------------------------------
+\ifTeaching@sectionpages
+  \AtBeginSection[]{%
+    \begingroup
+      \setbeamercolor{background canvas}{bg=TeachingPrimary}
+      \begin{frame}[plain,noframenumbering]
+        \vfill
+        \centering
+        {\usebeamerfont{title}\usebeamercolor[fg]{section title}%
+          \insertsectionhead\par}
+        \vfill
+      \end{frame}
+    \endgroup
+  }
+\fi
+
+% --------------------------------------------------------------------------
+% Mathematical environments: Spanish is the first supported language.
+% Beamer supplies theorem, lemma, corollary, definition, example and proof.
+% --------------------------------------------------------------------------
+\uselanguage{Spanish}
+\languagepath{Spanish}
+\deftranslation[to=Spanish]{Theorem}{Teorema}
+\deftranslation[to=Spanish]{Lemma}{Lema}
+\deftranslation[to=Spanish]{Corollary}{Corolario}
+\deftranslation[to=Spanish]{Definition}{Definición}
+\deftranslation[to=Spanish]{Definitions}{Definiciones}
+\deftranslation[to=Spanish]{Example}{Ejemplo}
+\deftranslation[to=Spanish]{Examples}{Ejemplos}
+\deftranslation[to=Spanish]{Proof}{Demostración}
+
+\theoremstyle{plain}
+\newtheorem{proposition}[theorem]{Proposición}
+
+\mode<all>
+
+\endinput
